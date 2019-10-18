@@ -1,23 +1,72 @@
 
-package projetc_java;
-
 import java.util.Scanner;
 
-public class Projetc_Java {
+public class project {
     static String [] login = new String[200];
     static String [] senha = new String[200];
     static String [] nick = new String[200];	
+    static int [][] amigos = new int[200][200];
 
     public static void perfil_logado(int dados) {
-        System.out.println("\n1 - ADICIONAR AMIGOS\n2 - VER MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SAIR\n");    
         while(true){
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.print("BEM-VINDO(A), ");
+            System.out.print(nick[dados]);
+            System.out.println("!");            
+            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - VER MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SAIR\n");            
             Scanner read = new Scanner (System.in);
             int opc = read.nextInt();
             
-            if(opc == 5) break; 
+            if(opc == 1) adicionar_amigos(dados); 
+            else if(opc == 2) mensagens();
+            else if(opc == 3) lista_amigos();
+            else if(opc == 4) minhas_comunidades();
+            else if(opc == 5) break;
         }
     } 
-     
+    
+    public static void adicionar_amigos(int dados_logado) {
+        String usuario;
+        int opc;
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        while(true){        
+            System.out.println("1 - PROCURAR");                
+            System.out.println("2 - VOLTAR AO PERFIL");
+            Scanner read = new Scanner(System.in);
+            opc = read.nextInt();
+
+            if(opc == 1){
+                System.out.print("NOME DO USUÁRIO: ");
+                Scanner read2 = new Scanner(System.in);                                
+                usuario = read2.nextLine();
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+                for(int i = 0; i < 200; i++) {
+                    if(nick[i].equals(usuario)) {
+                        amigos[dados_logado][i] = 1;
+                        System.out.println("CONVITE ENVIADO COM SUCESSO!\n");
+                        break;
+                    }
+                }
+            }
+            else if(opc == 2) {
+                break;
+            }           
+        }
+    }
+
+    public static void mensagens() {
+        
+    }
+
+    public static void lista_amigos() {
+        
+    }
+
+    public static void minhas_comunidades() {
+            
+    }
+
     public static void cadastro() {
         int i;
         String Login, Senha, Nick;
@@ -38,21 +87,20 @@ public class Projetc_Java {
             }
         }
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
-        System.out.print("CADASTRADO COM SUCESSO!");        
-        //System.out.println("\n\n\n\n\n");            
+        System.out.print("CADASTRADO COM SUCESSO!");                    
     }
-    
+
     public static void login() {
         
         while(true){
         int tru = 0, i;
-        String Login, Senha;                  
+        String Login, Senha;
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");                          
         System.out.print("LOGIN: ");
         Scanner read = new Scanner(System.in);        
         Login = read.nextLine();        
         System.out.print("SENHA: ");        
         Senha = read.nextLine();
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         
             for(i=0; i < 200; i++) {
                 if(login[i] == null) {
@@ -62,15 +110,14 @@ public class Projetc_Java {
                     break;
                 }
                 else if(login[i].equals(Login) && senha[i].equals(Senha)){
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    System.out.print("BEM-VINDO(A), ");
-                    System.out.print(nick[i]);
-                    System.out.println("!");
                     tru++;
                     break;
                 }
             }
-            if(tru != 0) perfil_logado(i);
+            if(tru != 0) {
+                perfil_logado(i);
+                break;
+            }    
         }    
     }
 
@@ -78,7 +125,8 @@ public class Projetc_Java {
 
             OUTER:
             while (true) {
-                char opcoes;                
+                char opcoes;
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");                                
                 System.out.println("                                        IFACE\n");
                 System.out.println("1 - CADASTRAR-SE");
                 System.out.println("2 - CONECTAR-SE");
@@ -111,4 +159,3 @@ public class Projetc_Java {
             }
     }
 }
-
