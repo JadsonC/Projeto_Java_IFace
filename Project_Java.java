@@ -13,7 +13,7 @@ public class project {
             System.out.print("BEM-VINDO(A), ");
             System.out.print(nick[dados]);
             System.out.println("!");            
-            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - VER MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SAIR\n");            
+            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - VER MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SOLICITAÇÕES DE AMIZADE\n6 - SAIR\n");            
             Scanner read = new Scanner (System.in);
             int opc = read.nextInt();
             
@@ -21,10 +21,22 @@ public class project {
             else if(opc == 2) mensagens();
             else if(opc == 3) lista_amigos();
             else if(opc == 4) minhas_comunidades();
-            else if(opc == 5) break;
+            else if(opc == 5) solicitacoes_amizade(dados);
+            else if(opc == 6) break;
         }
     } 
     
+    /*public static void solicitacoes_amizade(int dados_logado) {
+
+        System.out.println("SOLICITAÇÕES:\n");        
+        for(int i = 0; i < 200; i++) {
+            if(amigos[i][dados_logado] == 1) {
+                System.out.println(nick[i]);
+            }
+        }
+        System PAUSE;
+    }*/
+
     public static void adicionar_amigos(int dados_logado) {
         String usuario;
         int opc;
