@@ -1,12 +1,41 @@
 
+package main;
 import java.util.Scanner;
 
 public class Main {
     static String [] login = new String[200];
     static String [] senha = new String[200];
-    static String [] nick = new String[200];	
+    static String [] nick = new String[200];  
     static int [][] amigos = new int[200][200];
     
+    public static void excluir_perfil(int dados_logado) {
+        int opc;
+        Scanner read = new Scanner (System.in);
+        System.out.println("             VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR ESTA CONTA? TODOS OS DADOS SERÃO PERDIDOS!");
+        System.out.println("1 - SIM\n2 - VOLTAR");
+        opc = read.nextInt();
+        
+        if(opc == 1) {
+            login[dados_logado] = null;
+            senha[dados_logado] = null;
+            nick[dados_logado]  = null;
+            
+            for(int i = 0; i < 200; i++) {
+                amigos[dados_logado][i] = 0;
+            }
+            for(int i = 0; i < 200; i++) {
+                amigos[i][dados_logado] = 0;
+            }
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("CONTA EXCLUÍDA COM SUCESSO!");
+            
+        }
+        else if(opc == 2) return;
+    }
+    public static void perfil_logado(int dados_logado) {
+      
+    }
+
     public static void preenche_tabelas() {
         for(int i = 0; i <200; i++) {
             nick[i] = "-1";
@@ -18,13 +47,14 @@ public class Main {
         }
     }
 
-    public static void perfil_logado(int dados) {
+    public static void menu_logado(int dados) {
         while(true){
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print("BEM-VINDO(A), ");
             System.out.print(nick[dados]);
             System.out.println("!");            
-            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - VER MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SOLICITAÇÕES DE AMIZADE\n6 - SAIR\n");            
+            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - VER MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SOLICITAÇÕES DE AMIZADE\n6 - MEU PERFIL");
+            System.out.println("7 - EXCLUIR CONTA\n8 - SAIR");
             Scanner read = new Scanner (System.in);
             int opc = read.nextInt();
             
@@ -33,35 +63,68 @@ public class Main {
             else if(opc == 3) lista_amigos();
             else if(opc == 4) minhas_comunidades();
             else if(opc == 5) solicitacoes_amizade(dados);
-            else if(opc == 6) break;
+            else if(opc == 6) perfil_logado(dados);
+            else if(opc == 7) excluir_perfil(dados);
+            else if(opc == 8) break;
         }
     } 
     
     public static void solicitacoes_amizade(int dados_logado) {
-        System.out.println("SOLICITAÇÕES:\n");        
-        for(int i = 0; i < 200; i++) {
-            if(amigos[dados_logado][i] == 1) {
-                System.out.println(nick[i]);
+        
+        while(true){
+            System.out.println("                       SOLICITAÇÕES:\n");
+            for(int i = 0; i < 200; i++) {
+                if(amigos[i][dados_logado] == 1) {
+                    System.out.println(nick[i]);
+                }
+            }
+
+            Scanner read = new Scanner(System.in);
+            String usuario;
+            System.out.println("1 - ACEITAR SOLICITAÇÕES\n2 - EXCLUIR SOLICITAÇÕES\n3 - VOLTAR");
+            int opc = read.nextInt();
+
+            if(opc == 1) {
+                System.out.println("                       ACEITAR SOLICITAÇÕES");
+                System.out.print("NOME DE USUÁRIO: ");
+                Scanner read2 = new Scanner(System.in);        
+                usuario = read2.nextLine();
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                for(int i = 0; i < 200; i++) {
+                  if(nick[i].equals(usuario)) {
+                    if(amigos[i][dados_logado] == 1) {
+                      amigos[i][dados_logado] = 2;
+                      amigos[dados_logado][i] = 2;                      
+                      System.out.print("VOCÊ E ");
+                      System.out.print(nick[i]);
+                      System.out.println(" SÃO AMIGOS AGORA!\n");        
+                    }
+                    else System.out.println("NÃO HÁ SOLICITAÇOES DESSE USUÁRIO\n");
+                    break;
+                  }
+                }
+            }
+            else if(opc == 2) {
+                System.out.println("                       EXCLUIR SOLICITAÇÕES");
+                System.out.print("NOME DE USUÁRIO: ");
+                Scanner read2 = new Scanner(System.in);        
+                usuario = read2.nextLine();
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");                
+                for(int i = 0; i < 200; i++) {                    
+                    if(nick[i].equals(usuario)) {
+                        if(amigos[i][dados_logado] == 1) {
+                            amigos[i][dados_logado] = 0;                      
+                            System.out.println(" SOLICITAÇÃO EXCLUÍDA!\n");        
+                    }
+                    else System.out.println("NÃO HÁ SOLICITAÇOES DESSE USUÁRIO");
+                    break;
+                  }
+                }
+            }
+            else if(opc == 3) {
+                break;
             }
         }
-        Scanner read = new Scanner(System.in);
-        System.out.println("1 - ACEITAR SOLICITAÇÕES\n2 - EXCLUIR SOLICITAÇÕES\n3 - VOLTAR");
-        int opc = read.nextInt();
-        
-        if(opc == 1) {
-            System.out.println("                       ACEITAR SOLICITAÇÕES");
-            System.out.print("NOME DE USUÁRIO: ");
-            String usuario = read.nextLine();
-            
-            //if(amigos[dados_logado][])
-        }
-        else if(opc == 2) {
-            
-        }
-        else if(opc == 3) {
-                
-        }
-        
     }
 
     public static void adicionar_amigos(int dados_logado) {
@@ -121,10 +184,10 @@ public class Main {
         
         for(i =0; i< 200; i++) {
             if(login[i] == null) {
-        	login[i] = Login;
-        	senha[i] = Senha;
-        	nick[i] = Nick;
-        	break;
+          login[i] = Login;
+          senha[i] = Senha;
+          nick[i] = Nick;
+          break;
             }
         }
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
@@ -156,7 +219,7 @@ public class Main {
                 }
             }
             if(tru != 0) {
-                perfil_logado(i);
+                menu_logado(i);
                 break;
             }    
         }    
