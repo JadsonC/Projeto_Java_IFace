@@ -53,7 +53,7 @@ public class Main {
             System.out.print("NOME DE USUÁRIO: ");
             String usuario = read.nextLine();
             
-            if(amigos[dados_logado][])
+            //if(amigos[dados_logado][])
         }
         else if(opc == 2) {
             
