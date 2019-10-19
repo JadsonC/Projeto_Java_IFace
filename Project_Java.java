@@ -1,11 +1,22 @@
 
 import java.util.Scanner;
 
-public class project {
+public class Main {
     static String [] login = new String[200];
     static String [] senha = new String[200];
     static String [] nick = new String[200];	
     static int [][] amigos = new int[200][200];
+    
+    public static void preenche_tabelas() {
+        for(int i = 0; i <200; i++) {
+            nick[i] = "-1";
+        }
+        for(int c = 0; c < 200; c++) {
+            for(int l = 0; l <200; l++) {
+                amigos[l][c] = 0;
+            }
+        }
+    }
 
     public static void perfil_logado(int dados) {
         while(true){
@@ -26,18 +37,35 @@ public class project {
         }
     } 
     
-    /*public static void solicitacoes_amizade(int dados_logado) {
-
+    public static void solicitacoes_amizade(int dados_logado) {
         System.out.println("SOLICITAÇÕES:\n");        
         for(int i = 0; i < 200; i++) {
-            if(amigos[i][dados_logado] == 1) {
+            if(amigos[dados_logado][i] == 1) {
                 System.out.println(nick[i]);
             }
         }
-        System PAUSE;
-    }*/
+        Scanner read = new Scanner(System.in);
+        System.out.println("1 - ACEITAR SOLICITAÇÕES\n2 - EXCLUIR SOLICITAÇÕES\n3 - VOLTAR");
+        int opc = read.nextInt();
+        
+        if(opc == 1) {
+            System.out.println("                       ACEITAR SOLICITAÇÕES");
+            System.out.print("NOME DE USUÁRIO: ");
+            String usuario = read.nextLine();
+            
+            if(amigos[dados_logado][])
+        }
+        else if(opc == 2) {
+            
+        }
+        else if(opc == 3) {
+                
+        }
+        
+    }
 
     public static void adicionar_amigos(int dados_logado) {
+        int i;
         String usuario;
         int opc;
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -53,13 +81,14 @@ public class project {
                 usuario = read2.nextLine();
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
-                for(int i = 0; i < 200; i++) {
+                for(i = 0; i < 200; i++) {
                     if(nick[i].equals(usuario)) {
                         amigos[dados_logado][i] = 1;
                         System.out.println("CONVITE ENVIADO COM SUCESSO!\n");
                         break;
                     }
                 }
+                if(i == 200) System.out.println("USUÁRIO NÃO ENCONTRADO!\n");
             }
             else if(opc == 2) {
                 break;
@@ -134,6 +163,7 @@ public class project {
     }
 
     public static void main(String[] args) {
+        preenche_tabelas();
 
             OUTER:
             while (true) {
