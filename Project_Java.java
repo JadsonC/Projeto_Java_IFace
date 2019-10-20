@@ -1,5 +1,4 @@
-
-package main;
+//package main;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +7,47 @@ public class Main {
     static String [] senha = new String[200];
     static String [] nick = new String[200];  
     static int [][] amigos = new int[200][200];
+    static int [] idade = new int[200];
+    static String [] estado_civil = new String[200];
+
+    public static void altera_perfil(int dados_logado) {
+		Scanner read = new Scanner(System.in);
+		int opc, opc_2, altera_idade;
+		String altera;
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+       	System.out.println("EDITAR:\n1 - NOME DE USUÁRIO\n2 - IDADE\n3 - ESTADO CIVIL\n4 - VOLTAR");
+       	opc = read.nextInt();
+       	if(opc == 1) {
+       		System.out.print("DIGITE O NOVO NOME DE USUÁRIO: ");
+		    Scanner read2 = new Scanner(System.in);       		
+       		altera = read2.nextLine();
+       		nick[dados_logado] = altera;
+		    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
+       	  	System.out.println("NOME DE USUÁRIO ALTERADO COM SUCESSO!\n1 - VOLTAR");
+       	  	opc_2 = read.nextInt();
+       	  	if(opc_2 == 1) altera_perfil(dados_logado); 
+       	}
+       	if(opc == 2) {
+       		System.out.print("DIGITE A IDADE (somente numeros): ");
+		    Scanner read2 = new Scanner(System.in);       		
+       		altera_idade = read2.nextInt();
+       		idade[dados_logado] = altera_idade;
+		    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
+       	  	System.out.println("IDADE ALTERADA COM SUCESSO!\n1 - VOLTAR");
+       	  	opc_2 = read.nextInt();
+       	  	if(opc_2 == 1) altera_perfil(dados_logado);       		
+       	}
+       	if(opc == 1) {
+       		System.out.print("DIGITE SEU ATUAL ESTADO CIVIL: ");
+		      Scanner read2 = new Scanner(System.in);       		
+       		altera = read2.nextLine();
+       		estado_civil[dados_logado] = altera;
+		      System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
+       	  	System.out.println("ESTADO CIVIL ALTERADO COM SUCESSO!\n1 - VOLTAR");
+       	  	opc_2 = read.nextInt();
+       	  	if(opc_2 == 1) altera_perfil(dados_logado); 
+       	}              		
+    } 
     
     public static void excluir_perfil(int dados_logado) {
         int opc;
@@ -35,7 +75,24 @@ public class Main {
         else if(opc == 2) return;
     }
     public static void perfil_logado(int dados_logado) {
-      
+    	Scanner read = new Scanner(System.in);
+    	int opc;
+    	String altera;
+    	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.print("        MEU PERFIL\n\nNOME DE USUÁRIO: ");
+        System.out.println(nick[dados_logado]);
+        System.out.print("IDADE: ");
+       	System.out.println(idade[dados_logado]);
+       	System.out.print("ESTADO CIVIL: ");       	        
+		System.out.println(estado_civil[dados_logado]);      	
+       	System.out.println("\n\n1 - EDITAR PERFIL\n2 - VOLTAR");
+       	opc = read.nextInt();
+
+       	if(opc == 1) {
+      		altera_perfil(dados_logado);
+       	}
+       	else if(opc == 2) return;
+       	else perfil_logado(dados_logado);
     }
 
     public static void preenche_tabelas() {
@@ -189,21 +246,27 @@ public class Main {
     }
 
     public static void cadastro() {
-        int i, opc;
-        String Login, Senha, Nick;
+        int i, opc, Idade;
+        String Login, Senha, Nick, Estado_civil;
         Scanner read = new Scanner(System.in);       
         System.out.print("LOGIN que deseja cadastrar: ");        
         Login = read.nextLine();
         System.out.print("SENHA que deseja cadastrar: ");
         Senha = read.nextLine();        
         System.out.print("NOME DO USUÁRIO: ");        
-        Nick = read.nextLine();    
+        Nick = read.nextLine();
+        System.out.print("ESTADO CIVIL: ");        
+        Estado_civil = read.nextLine();
+        System.out.print("IDADE (somente numeros): ");        
+        Idade = read.nextInt();                    
         
         for(i =0; i< 200; i++) {
             if(login[i] == null || login[i].equals("-1")) {
             login[i] = Login;
             senha[i] = Senha;
             nick[i] = Nick;
+            estado_civil[i] = Estado_civil;
+            idade[i] = Idade;
             break;
             }
         }
@@ -252,9 +315,16 @@ public class Main {
             OUTER:
             while (true) {
                 char opcoes;
-                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");                                
-                System.out.println("                                        IFACE\n");
-                System.out.println("1 - CADASTRAR-SE");
+                System.out.println(" \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");                
+                System.out.println("      ___   __________  ___________   ___________   ___________");
+                System.out.println("      |*|   |*-------|  |*-------*|   |*--------|   |*--------|");
+                System.out.println("      |*|   |*|         |*|     |*|   |*|           |*|");
+                System.out.println("      |*|   |*|______|  |*-------*|   |*|           |*|_______");
+                System.out.println("      |*|   |*-------|  |*-------*|   |*|           |*--------|");
+                System.out.println("      |*|   |*|         |*|     |*|   |*|           |*|");
+                System.out.println("      |*|   |*|         |*|     |*|   |*|_______|   |*|_______|");
+                System.out.println("      ---   ---         ---     ---   |---------|   |---------|");
+                System.out.println("\n\n1 - CADASTRAR-SE");
                 System.out.println("2 - CONECTAR-SE");
                 System.out.println("3 - SAIR\n");
                 Scanner input = new Scanner(System.in);
@@ -271,15 +341,7 @@ public class Main {
                         break;
                     case '3':
                         break OUTER;
-                    default:
-                        System.out.println("\n\n\n\n\n\n\n\n\n\n");
-                        System.out.println("Comando inválido");
-                        System.out.println("\n\n\n\n\n");
-                        
-                        for(int i=0; i<200; i++) {
-                            if(nick[i] == null) break; 
-                            System.out.println(nick[i]);
-                        }       
+                    default:       
                     break;
                 }
             }
