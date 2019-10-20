@@ -1,7 +1,9 @@
 
+package main;
 import java.util.Scanner;
 
 public class Main {
+    static String [] mensagens = new String[200]; 
     static String [] login = new String[200];
     static String [] senha = new String[200];
     static String [] nick = new String[200];  
@@ -17,7 +19,7 @@ public class Main {
         if(opc == 1) {
             login[dados_logado] = null;
             senha[dados_logado] = null;
-            nick[dados_logado]  = null;
+            nick[dados_logado]  = "-1";
             
             for(int i = 0; i < 200; i++) {
                 amigos[dados_logado][i] = 0;
@@ -51,7 +53,7 @@ public class Main {
 
     public static void menu_logado(int dados) {
         while(true){
-            if(nick[dados] == null) break;
+            if(nick[dados].equals("-1")) break;
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print("BEM-VINDO(A), ");
             System.out.print(nick[dados]);
@@ -63,7 +65,7 @@ public class Main {
             
             if(opc == 1) adicionar_amigos(dados); 
             else if(opc == 2) mensagens();
-            else if(opc == 3) lista_amigos();
+            else if(opc == 3) lista_amigos(dados);
             else if(opc == 4) minhas_comunidades();
             else if(opc == 5) solicitacoes_amizade(dados);
             else if(opc == 6) perfil_logado(dados);
@@ -166,8 +168,22 @@ public class Main {
         
     }
 
-    public static void lista_amigos() {
-        
+    public static void lista_amigos(int dados_logado) {
+        int opc;
+        Scanner read = new Scanner(System.in);
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        //while(true) {
+            for(int i = 0; i < 200; i++) {
+                if(amigos[dados_logado][i] == 2 && amigos[i][dados_logado] == 2) {
+                    System.out.println(nick[i]);
+                }
+            }
+            System.out.println("1 - VOLTAR");
+            opc = read.nextInt();
+            
+            if(opc == 1) return;
+            else lista_amigos(dados_logado);
+        //}
     }
 
     public static void minhas_comunidades() {
@@ -187,17 +203,16 @@ public class Main {
         
         for(i =0; i< 200; i++) {
             if(login[i] == null) {
-          login[i] = Login;
-          senha[i] = Senha;
-          nick[i] = Nick;
-          break;
+            login[i] = Login;
+            senha[i] = Senha;
+            nick[i] = Nick;
+            break;
             }
         }
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
         System.out.println("CADASTRADO COM SUCESSO!");
         System.out.println("1 - VOLTAR AO MENU PRINCIPAL");
         opc = read.nextInt();
-        if(opc == 1) return;
     }
 
     public static void login() {
@@ -214,10 +229,12 @@ public class Main {
         
             for(i=0; i < 200; i++) {
                 if(login[i] == null) {
-                    System.out.println("Login e/ou senha inválidos. Não possui cadastro!");
+                    System.out.println("\nLOGIN E/OU SENHA INVÁLIDOS! NÃO POSSUI CADASTRO!\n");
+                    System.out.println("1 - VOLTAR A TELA DE LOGIN!\n2 - VOLTAR AO MENU PRINCIPAL");                    
                     int a = read.nextInt();
-                    if(a == 1) return;
-                    break;
+                    if(a == 1) break;
+                    else if(a == 2) return;
+                    else continue;
                 }
                 else if(login[i].equals(Login) && senha[i].equals(Senha)){
                     tru++;
