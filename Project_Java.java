@@ -17,15 +17,13 @@ public class Main {
         opc = read.nextInt();
         
         if(opc == 1) {
-            login[dados_logado] = null;
+            login[dados_logado] = "-1";
             senha[dados_logado] = null;
             nick[dados_logado]  = "-1";
             
             for(int i = 0; i < 200; i++) {
                 amigos[dados_logado][i] = 0;
-            }
-            for(int i = 0; i < 200; i++) {
-                amigos[i][dados_logado] = 0;
+                amigos[i][dados_logado] = 0;                
             }
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("CONTA EXCLUÍDA COM SUCESSO!");
@@ -202,7 +200,7 @@ public class Main {
         Nick = read.nextLine();    
         
         for(i =0; i< 200; i++) {
-            if(login[i] == null) {
+            if(login[i] == null || login[i].equals("-1")) {
             login[i] = Login;
             senha[i] = Senha;
             nick[i] = Nick;
