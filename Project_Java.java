@@ -1,5 +1,4 @@
 
-package main;
 import java.util.Scanner;
 
 public class Main {
@@ -28,7 +27,10 @@ public class Main {
             }
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("CONTA EXCLUÍDA COM SUCESSO!");
+            System.out.println("1 - VOLTAR AO MENU PRINCIPAL");
+            opc = read.nextInt();
             
+            if(opc == 1) return;
         }
         else if(opc == 2) return;
     }
@@ -49,6 +51,7 @@ public class Main {
 
     public static void menu_logado(int dados) {
         while(true){
+            if(nick[dados] == null) break;
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print("BEM-VINDO(A), ");
             System.out.print(nick[dados]);
@@ -172,7 +175,7 @@ public class Main {
     }
 
     public static void cadastro() {
-        int i;
+        int i, opc;
         String Login, Senha, Nick;
         Scanner read = new Scanner(System.in);       
         System.out.print("LOGIN que deseja cadastrar: ");        
@@ -191,7 +194,10 @@ public class Main {
             }
         }
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
-        System.out.print("CADASTRADO COM SUCESSO!");                    
+        System.out.println("CADASTRADO COM SUCESSO!");
+        System.out.println("1 - VOLTAR AO MENU PRINCIPAL");
+        opc = read.nextInt();
+        if(opc == 1) return;
     }
 
     public static void login() {
