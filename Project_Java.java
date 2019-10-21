@@ -2,6 +2,8 @@
 import java.util.Scanner;
 
 public class Main {
+    static int [][] contador_mensagens = new int[200][200];
+    static int cont;
     static String [][][] mensagens = new String[200][200][200]; 
     static String [] login = new String[200];
     static String [] senha = new String[200];
@@ -11,31 +13,40 @@ public class Main {
     static String [] estado_civil = new String[200];
 
     public static void altera_perfil(int dados_logado) {
-	    Scanner read = new Scanner(System.in);
-	    int opc, opc_2, altera_idade;
-	    String altera;
-	    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+      Scanner read = new Scanner(System.in);
+      int opc, opc_2, altera_idade;
+      String altera;
+      System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("EDITAR:\n1 - NOME DE USUÁRIO\n2 - IDADE\n3 - ESTADO CIVIL\n4 - VOLTAR");
         opc = read.nextInt();
         if(opc == 1) {
           System.out.print("DIGITE O NOVO NOME DE USUÁRIO: ");
-        Scanner read2 = new Scanner(System.in);           
+          Scanner read2 = new Scanner(System.in);           
           altera = read2.nextLine();
+          for(int i = 0; i < 200; i++) {
+            if(nick[i].equals(altera)) {
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                System.out.println("NOME DE USUÁRIO JÁ EXISTENTE!\n1 - VOLTAR");
+                opc_2 = read.nextInt();
+                altera_perfil(dados_logado);
+                return;
+            }
+          }
           nick[dados_logado] = altera;
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
-            System.out.println("NOME DE USUÁRIO ALTERADO COM SUCESSO!\n1 - VOLTAR");
-            opc_2 = read.nextInt();
-            if(opc_2 == 1) altera_perfil(dados_logado); 
+          System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
+          System.out.println("NOME DE USUÁRIO ALTERADO COM SUCESSO!\n1 - VOLTAR");
+          opc_2 = read.nextInt();
+          if(opc_2 == 1) altera_perfil(dados_logado); 
         }
         if(opc == 2) {
           System.out.print("DIGITE A IDADE (somente numeros): ");
-        Scanner read2 = new Scanner(System.in);           
+          Scanner read2 = new Scanner(System.in);           
           altera_idade = read2.nextInt();
           idade[dados_logado] = altera_idade;
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
-            System.out.println("IDADE ALTERADA COM SUCESSO!\n1 - VOLTAR");
-            opc_2 = read.nextInt();
-            if(opc_2 == 1) altera_perfil(dados_logado);           
+          System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
+          System.out.println("IDADE ALTERADA COM SUCESSO!\n1 - VOLTAR");
+          opc_2 = read.nextInt();
+          if(opc_2 == 1) altera_perfil(dados_logado);           
         }
         if(opc == 3) {
           System.out.print("DIGITE SEU ATUAL ESTADO CIVIL: ");
@@ -75,24 +86,53 @@ public class Main {
         }
         else if(opc == 2) return;
     }
-    public static void perfil_logado(int dados_logado) {
-      	Scanner read = new Scanner(System.in);
-      	int opc;
-      	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.print("        MEU PERFIL\n\nNOME DE USUÁRIO: ");
-        System.out.println(nick[dados_logado]);
-        System.out.print("IDADE: ");
-        System.out.println(idade[dados_logado]);
-        System.out.print("ESTADO CIVIL: ");                 
-  		System.out.println(estado_civil[dados_logado]);       
-        System.out.println("\n\n1 - EDITAR PERFIL\n2 - VOLTAR");
+    public static void perfis(int dados_logado) {
+        Scanner read = new Scanner(System.in);
+        int opc;
+        String procura;
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("1 - MEU PERFIL\n2 - PROCURAR PERFIS DE OUTROS USUÁRIOS\n3 - VOLTAR");
         opc = read.nextInt();
-
         if(opc == 1) {
-          altera_perfil(dados_logado);
+          System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");          
+          System.out.print("        MEU PERFIL\n\nNOME DE USUÁRIO: ");
+          System.out.println(nick[dados_logado]);
+          System.out.print("IDADE: ");
+          System.out.println(idade[dados_logado]);
+          System.out.print("ESTADO CIVIL: ");                 
+          System.out.println(estado_civil[dados_logado]);       
+          System.out.println("\n\n1 - EDITAR PERFIL\n2 - VOLTAR");
+          opc = read.nextInt();
+
+          if(opc == 1) {
+            altera_perfil(dados_logado);
+          }
+          else if(opc == 2) return;
+          else perfis(dados_logado);
         }
-        else if(opc == 2) return;
-        else perfil_logado(dados_logado);
+        if(opc == 2) {
+          Scanner read2 = new Scanner(System.in);
+          System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPROCURAR PERFIS");
+          System.out.print("DIGITE O NOME DE USUÁRIO: ");
+          procura = read2.nextLine();
+
+          for(int i = 0; i < 200; i++) {
+            if(nick[i].equals(procura)) {
+              System.out.println("\n" + "NOME DE USUÁRIO: " + nick[i]);
+              System.out.print("IDADE: ");
+              System.out.println(idade[i]);
+              System.out.print("ESTADO CIVIL: ");                 
+              System.out.println(estado_civil[i]);
+              System.out.println("\n1 - VOLTAR");
+              opc = read.nextInt();
+              perfis(dados_logado);
+              return;
+            }
+          }
+          System.out.println("USUÁRIO NÃO ENCONTRADO!\n1 - VOLTAR");
+          opc = read.nextInt();
+        }
+        if(opc == 3) return;
     }
 
     public static void preenche_tabelas() {
@@ -104,6 +144,7 @@ public class Main {
         for(int c = 0; c < 200; c++) {
             for(int l = 0; l <200; l++) {
                 amigos[l][c] = 0;
+                contador_mensagens[l][c] = 0;
             }
         }
     }
@@ -115,20 +156,18 @@ public class Main {
             System.out.print("BEM-VINDO(A), ");
             System.out.print(nick[dados]);
             System.out.println("!");            
-            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - MENSAGENS\n3 - LISTA DE AMIGOS\n4 - MINHAS COMUNIDADES\n5 - SOLICITAÇÕES DE AMIZADE\n6 - MEU PERFIL");
-            System.out.println("7 - EXCLUIR CONTA\n8 - SAIR");
+            System.out.println("\n1 - ADICIONAR AMIGOS\n2 - MENSAGENS\n3 - LISTA DE AMIGOS\n4 - SOLICITAÇÕES DE AMIZADE\n5 - PERFIS");
+            System.out.println("6 - EXCLUIR CONTA\n7 - SAIR");
             Scanner read = new Scanner (System.in);
             int opc = read.nextInt();
             
             if(opc == 1) adicionar_amigos(dados); 
-            else if(opc == 2) {System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); mensagens(dados);}
+            else if(opc == 2) mensagens(dados);
             else if(opc == 3) lista_amigos(dados);
-            else if(opc == 4) minhas_comunidades();
-            else if(opc == 5) solicitacoes_amizade(dados);
-            else if(opc == 6) perfil_logado(dados);
-            else if(opc == 7) excluir_perfil(dados);
-            else if(opc == 8) break;
-
+            else if(opc == 4) solicitacoes_amizade(dados);
+            else if(opc == 5) perfis(dados);
+            else if(opc == 6) excluir_perfil(dados);
+            else if(opc == 7) break;
         }
     } 
     
@@ -197,7 +236,7 @@ public class Main {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         while(true){        
             System.out.println("1 - PROCURAR");                
-            System.out.println("2 - VOLTAR AO PERFIL");
+            System.out.println("2 - VOLTAR AO MENU");
             Scanner read = new Scanner(System.in);
             opc = read.nextInt();
 
@@ -214,7 +253,10 @@ public class Main {
                         break;
                     }
                 }
-                if(i == 200) System.out.println("USUÁRIO NÃO ENCONTRADO!\n");
+                if(i == 200) {
+                    System.out.println("USUÁRIO NÃO ENCONTRADO!\n1 - VOLTAR");
+                    opc = read.nextInt();
+                }    
             }
             else if(opc == 2) {
                 break;
@@ -223,11 +265,13 @@ public class Main {
     }
 
     public static void mensagens(int dados_logado) {
-        int opc, truth = 0, dados_recebe;        
+        int opc, dados_recebe;
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
         System.out.println("   MENSAGENS\n1 - ENVIAR\n2 - VISUALIZAR\n3 - VOLTAR");
         Scanner read = new Scanner(System.in);        
         opc = read.nextInt();
         if(opc == 1) {
+            int truth = 0; 
             System.out.print("DESEJA ENVIAR UMA MENSAGEM PARA QUAL AMIGO? (digite o nome de usuário): ");
             String enviar;
             Scanner read2 = new Scanner(System.in);            
@@ -242,6 +286,7 @@ public class Main {
             if(truth == 0) {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
                 System.out.println("AMIGO NÃO ENCONTRADO!\n");
+                opc = read.nextInt();
                 mensagens(dados_logado);
                 return;
             }
@@ -249,17 +294,53 @@ public class Main {
                 System.out.println("ESCREVA SUA MENSAGEM: ");
                 enviar = read2.nextLine();
 
-                for(int i = 0; i < 200; i++) {
-                  if(mensagens[dados_logado][dados_recebe][i] == null) {
-                    mensagens[dados_logado][dados_recebe][i] = enviar;
+                for(; contador_mensagens[dados_logado][dados_recebe] < 200; contador_mensagens[dados_logado][dados_recebe]++) {
+                  if(mensagens[dados_logado][dados_recebe][contador_mensagens[dados_logado][dados_recebe]] == null) {
+                    mensagens[dados_logado][dados_recebe][contador_mensagens[dados_logado][dados_recebe]] = (nick[dados_logado]+ ":" + " " + enviar);
                     System.out.println("MENSAGEM ENVIADA COM SUCESSO!\n");
+                    contador_mensagens[dados_recebe][dados_logado] = contador_mensagens[dados_logado][dados_recebe];
+                    contador_mensagens[dados_recebe][dados_logado]++;
                     opc = read2.nextInt();
+                      System.out.println(contador_mensagens[dados_logado][dados_recebe]);
                     break;
-                  } 
-                }
+                  }
+                }                
             }
         }
-        if(opc == 2);
+        if(opc == 2) {
+           int truth = 0; 
+            System.out.print("DESEJA VER MENSAGENS DE QUAL AMIGO? (digite o nome de usuário): ");
+            String enviar;
+            Scanner read2 = new Scanner(System.in);            
+            enviar = read2.nextLine();
+            
+            for(dados_recebe = 0; dados_recebe < 200; dados_recebe++) {
+                if(nick[dados_recebe].equals(enviar)) {
+                    truth++;
+                    break;
+                }
+            }
+            if(truth == 0) {
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
+                System.out.println("AMIGO NÃO ENCONTRADO!\n1 - VOLTAR");
+                opc = read.nextInt();
+                mensagens(dados_logado);
+                return;
+            }
+            else {
+              System.out.println("\n");
+              for(int i =0; i < 200; i++) {
+                if(mensagens[dados_logado][dados_recebe][i] != null) {
+                  System.out.println(mensagens[dados_logado][dados_recebe][i]);
+                }
+                if(mensagens[dados_recebe][dados_logado][i] != null) {
+                    System.out.println(mensagens[dados_recebe][dados_logado][i]);                    
+                  }
+              }
+              System.out.println("\n1 - VOLTAR");
+              opc = read.nextInt();                                       
+            }   
+        }
         if(opc == 3) return;
         else mensagens(dados_logado);
         
