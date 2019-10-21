@@ -1,4 +1,4 @@
-package main;
+//package main;
 import java.util.Scanner;
 
 public class Main {
@@ -11,10 +11,10 @@ public class Main {
     static String [] estado_civil = new String[200];
 
     public static void altera_perfil(int dados_logado) {
-    Scanner read = new Scanner(System.in);
-    int opc, opc_2, altera_idade;
-    String altera;
-    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	    Scanner read = new Scanner(System.in);
+	    int opc, opc_2, altera_idade;
+	    String altera;
+	    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("EDITAR:\n1 - NOME DE USUÁRIO\n2 - IDADE\n3 - ESTADO CIVIL\n4 - VOLTAR");
         opc = read.nextInt();
         if(opc == 1) {
@@ -76,15 +76,15 @@ public class Main {
         else if(opc == 2) return;
     }
     public static void perfil_logado(int dados_logado) {
-      Scanner read = new Scanner(System.in);
-      int opc;
-      System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+      	Scanner read = new Scanner(System.in);
+      	int opc;
+      	System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.print("        MEU PERFIL\n\nNOME DE USUÁRIO: ");
         System.out.println(nick[dados_logado]);
         System.out.print("IDADE: ");
         System.out.println(idade[dados_logado]);
         System.out.print("ESTADO CIVIL: ");                 
-  System.out.println(estado_civil[dados_logado]);       
+  		System.out.println(estado_civil[dados_logado]);       
         System.out.println("\n\n1 - EDITAR PERFIL\n2 - VOLTAR");
         opc = read.nextInt();
 
@@ -121,7 +121,7 @@ public class Main {
             int opc = read.nextInt();
             
             if(opc == 1) adicionar_amigos(dados); 
-            else if(opc == 2) mensagens(dados);
+            else if(opc == 2) {System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); mensagens(dados);}
             else if(opc == 3) lista_amigos(dados);
             else if(opc == 4) minhas_comunidades();
             else if(opc == 5) solicitacoes_amizade(dados);
@@ -223,8 +223,7 @@ public class Main {
     }
 
     public static void mensagens(int dados_logado) {
-        int opc, truth = 0, dados_recebe;
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
+        int opc, truth = 0, dados_recebe;        
         System.out.println("   MENSAGENS\n1 - ENVIAR\n2 - VISUALIZAR\n3 - VOLTAR");
         Scanner read = new Scanner(System.in);        
         opc = read.nextInt();
@@ -241,6 +240,7 @@ public class Main {
                 }
             }
             if(truth == 0) {
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");   
                 System.out.println("AMIGO NÃO ENCONTRADO!\n");
                 mensagens(dados_logado);
                 return;
@@ -269,18 +269,16 @@ public class Main {
         int opc;
         Scanner read = new Scanner(System.in);
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        //while(true) {
-            for(int i = 0; i < 200; i++) {
-                if(amigos[dados_logado][i] == 2 && amigos[i][dados_logado] == 2) {
-                    System.out.println(nick[i]);
-                }
+        for(int i = 0; i < 200; i++) {
+            if(amigos[dados_logado][i] == 2 && amigos[i][dados_logado] == 2) {
+                System.out.println(nick[i]);
             }
-            System.out.println("1 - VOLTAR");
-            opc = read.nextInt();
+        }
+        System.out.println("1 - VOLTAR");
+        opc = read.nextInt();
             
-            if(opc == 1) return;
-            else lista_amigos(dados_logado);
-        //}
+        if(opc == 1) return;
+        else lista_amigos(dados_logado);
     }
 
     public static void minhas_comunidades() {
