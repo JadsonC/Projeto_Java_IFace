@@ -1,4 +1,4 @@
-//package main;
+package main;
 import java.util.Scanner;
 
 public class Main {
@@ -243,6 +243,7 @@ public class Main {
             if(truth == 0) {
                 System.out.println("AMIGO NÃO ENCONTRADO!\n");
                 mensagens(dados_logado);
+                return;
             }
             else {
                 System.out.println("ESCREVA SUA MENSAGEM: ");
@@ -258,7 +259,8 @@ public class Main {
                 }
             }
         }
-        if(opc == 2) return;
+        if(opc == 2);
+        if(opc == 3) return;
         else mensagens(dados_logado);
         
     }
