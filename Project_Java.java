@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 public class Main {
-    static String [] mensagens = new String[200]; 
+    static String [][][] mensagens = new String[200][200][200]; 
     static String [] login = new String[200];
     static String [] senha = new String[200];
     static String [] nick = new String[200];  
@@ -37,7 +37,7 @@ public class Main {
        	  	opc_2 = read.nextInt();
        	  	if(opc_2 == 1) altera_perfil(dados_logado);       		
        	}
-       	if(opc == 1) {
+       	if(opc == 3) {
        		System.out.print("DIGITE SEU ATUAL ESTADO CIVIL: ");
 		      Scanner read2 = new Scanner(System.in);       		
        		altera = read2.nextLine();
@@ -46,7 +46,8 @@ public class Main {
        	  	System.out.println("ESTADO CIVIL ALTERADO COM SUCESSO!\n1 - VOLTAR");
        	  	opc_2 = read.nextInt();
        	  	if(opc_2 == 1) altera_perfil(dados_logado); 
-       	}              		
+       	}
+       	if(opc == 4) return;              		
     } 
     
     public static void excluir_perfil(int dados_logado) {
@@ -58,7 +59,7 @@ public class Main {
         
         if(opc == 1) {
             login[dados_logado] = "-1";
-            senha[dados_logado] = null;
+            senha[dados_logado] = "-1";
             nick[dados_logado]  = "-1";
             
             for(int i = 0; i < 200; i++) {
@@ -98,6 +99,8 @@ public class Main {
     public static void preenche_tabelas() {
         for(int i = 0; i <200; i++) {
             nick[i] = "-1";
+            login[i] = "-1";
+            senha[i] = "-1";
         }
         for(int c = 0; c < 200; c++) {
             for(int l = 0; l <200; l++) {
@@ -246,15 +249,53 @@ public class Main {
     }
 
     public static void cadastro() {
-        int i, opc, Idade;
+        int i, opc, Idade, truth = 0;
         String Login, Senha, Nick, Estado_civil;
         Scanner read = new Scanner(System.in);       
         System.out.print("LOGIN que deseja cadastrar: ");        
         Login = read.nextLine();
+
+        for(i = 0; i < 200; i++) {
+        	if(login[i].equals(Login)) {
+        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        		
+        		System.out.println("LOGIN JÁ EXISTENTE!\n");
+        		truth++;
+        		break;        	    
+        	}
+        }
+        if(truth == 1) {
+        	cadastro();
+        	return;
+        }
         System.out.print("SENHA que deseja cadastrar: ");
-        Senha = read.nextLine();        
+        Senha = read.nextLine();
+
+        for(i = 0; i < 200; i++) {
+        	if(senha[i].equals(Senha)) {
+        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        		
+        		System.out.println("\nSENHA JÁ EXISTENTE!\n");
+        		truth++;
+        		break;        	    
+        	}
+        }
+        if(truth == 1) {
+        	cadastro();
+        	return;
+        }
         System.out.print("NOME DO USUÁRIO: ");        
         Nick = read.nextLine();
+        for(i = 0; i < 200; i++) {
+        	if(nick[i].equals(Nick)) {
+        		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        		
+        		System.out.println("\nNOME DE USUÁRIO JÁ EXISTENTE!\n");
+        		truth++;
+        		break;        	    
+        	}
+        }
+        if(truth == 1) {
+        	cadastro();
+        	return;
+        }        
         System.out.print("ESTADO CIVIL: ");        
         Estado_civil = read.nextLine();
         System.out.print("IDADE (somente numeros): ");        
@@ -262,18 +303,20 @@ public class Main {
         
         for(i =0; i< 200; i++) {
             if(login[i] == null || login[i].equals("-1")) {
-            login[i] = Login;
-            senha[i] = Senha;
-            nick[i] = Nick;
-            estado_civil[i] = Estado_civil;
-            idade[i] = Idade;
-            break;
+	            login[i] = Login;
+	            senha[i] = Senha;
+	            nick[i] = Nick;
+	            estado_civil[i] = Estado_civil;
+	            idade[i] = Idade;
+	            break;
             }
         }
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");        
         System.out.println("CADASTRADO COM SUCESSO!");
         System.out.println("1 - VOLTAR AO MENU PRINCIPAL");
         opc = read.nextInt();
+        if(opc == 1) return;
+         
     }
 
     public static void login() {
@@ -289,9 +332,9 @@ public class Main {
         Senha = read.nextLine();
         
             for(i=0; i < 200; i++) {
-                if(login[i] == null) {
+                if(login[i] == "-1" && i == 199) {
                     System.out.println("\nLOGIN E/OU SENHA INVÁLIDOS! NÃO POSSUI CADASTRO!\n");
-                    System.out.println("1 - VOLTAR A TELA DE LOGIN!\n2 - VOLTAR AO MENU PRINCIPAL");                    
+                    System.out.println("1 - VOLTAR A TELA DE LOGIN\n2 - VOLTAR AO MENU PRINCIPAL");                    
                     int a = read.nextInt();
                     if(a == 1) break;
                     else if(a == 2) return;
